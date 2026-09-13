@@ -1,0 +1,18 @@
+# Section 3 — The Cap, Measured
+
+A dark-themed technical diagram (900×300px, 3:1 ratio, delivered as PNG) illustrating that a reranker reads a long document only up to a fixed point: one long document strip with answer markers placed at increasing depths, and a hard line past which the markers are no longer seen. Dark charcoal background (#0D1117), flat vector rendering, no 3D effects, at least 5% clear margin on every edge. Colours: Elastic teal (#00BFB3) for Elasticsearch components and the chunk-rerank path, light blue (#1BA9F5) for text the reranker reads, desaturated slate grey for text it never reads, pink (#F04E98) only for the cap line or a rejection, yellow (#FEC514) only for the answer. Labels in a clean monospaced face, grey unless noted.
+
+**Key components (left to right):**
+
+- **Left and centre: one document strip** — a single long horizontal bar spanning about 70% of the width, labelled above its left end "~14,000 tokens". The left portion of the bar, up to the cap line, is light blue; the right portion is slate grey and fades slightly toward its end.
+- **Cap line** — one thin vertical pink line crossing the bar at about 58% of its length, labelled above "8,192-token cap".
+- **Five markers** — small yellow dots on the bar at positions proportional to 2,000, 6,000, 7,500, 9,000 and 12,000 out of 14,000, each labelled below with its number: "2,000", "6,000", "7,500", "9,000", "12,000". The three left of the cap line are bright yellow with a small teal "seen" label beneath the number; the two right of it are dim, outlined only, with a grey "not seen" label beneath.
+- **Right: reranker box** — rounded rectangle in teal, labelled ".jina-reranker-v3.5", with a thin light-blue line from the cap line's top to the box, showing that what the reranker receives ends at the line.
+
+**Design principle:**
+The image communicates a single idea: "the reranker reads the document up to the cap and nothing past it; an answer placed beyond that point is invisible." The cap line must read as a hard edge, not a gradient.
+
+**Text accuracy:**
+Every string must be copied character-for-character; the only permitted strings in the frame are: `~14,000 tokens`, `8,192-token cap`, `2,000`, `6,000`, `7,500`, `9,000`, `12,000`, `seen`, `not seen`, `.jina-reranker-v3.5`. Watch for doubled consonants ("Serrverless"-type errors) and proofread every label letter by letter before delivering; regenerate rather than deliver a misspelled frame.
+
+**Exclusions:** No legend, caption box, title, footnote, colour key, or any explanatory text block. No logos, brand marks, icons of real products, or watermarks. Only the nodes, arrows, and labels listed above appear in the frame.

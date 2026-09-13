@@ -1,0 +1,20 @@
+# Section 8 — Does semantic_text Avoid This?
+
+A dark-themed technical diagram (900×300px, 3:1 ratio, delivered as PNG) illustrating that a semantic_text field, chunked and embedded at ingest, still hands a reranker the whole original text: the vectors decide which manuals are retrieved, but the reranker reads text, not vectors. Dark charcoal background (#0D1117), flat vector rendering, no 3D effects, at least 5% clear margin on every edge. Colours: Elastic teal (#00BFB3) for Elasticsearch components and the chunk-rerank path, light blue (#1BA9F5) for text the reranker reads, desaturated slate grey for text it never reads, pink (#F04E98) only for the cap line or a rejection, yellow (#FEC514) only for the answer. Labels in a clean monospaced face, grey unless noted.
+
+**Key components (left to right):**
+
+- **Left: Elasticsearch index** — rounded rectangle in teal with a faint glow, labelled "manuals_semantic". Inside it one wide field chip in light blue labelled "content (semantic_text)", and beneath the chip a row of small teal squares labelled "chunk vectors".
+- **Three lanes to the right**, stacked, each ending in a result label at the far right:
+  - **Top lane, labelled "Semantic only" in teal** — a teal arrow from the chunk vectors to the result "8 of 9".
+  - **Middle lane, labelled "Rerank" in light blue** — a thick light-blue arrow from the field chip itself, not the vectors, labelled above "fetches the whole text", to a small reranker box labelled ".jina-reranker-v3.5", then to the result "4 of 9" in grey.
+  - **Bottom lane, labelled "Chunk Rerank" in teal** — a teal arrow from the field chip into a glowing teal box labelled "chunk_rescorer", then a thin arrow with one yellow chip to a second reranker box labelled ".jina-reranker-v3.5", then to the result "9 of 9" in teal.
+- The middle lane's arrow must originate at the text chip and bypass the chunk vectors, so the eye sees that the vectors play no part in what the reranker receives.
+
+**Design principle:**
+The image communicates a single idea: "the vectors chose the manuals, but the reranker was handed the whole text anyway, so it failed the same way; chunking what the reranker reads is what fixes it." The three result labels must line up vertically at the right edge.
+
+**Text accuracy:**
+Every string must be copied character-for-character; the only permitted strings in the frame are: `manuals_semantic`, `content (semantic_text)`, `chunk vectors`, `Semantic only`, `8 of 9`, `Rerank`, `fetches the whole text`, `.jina-reranker-v3.5`, `4 of 9`, `Chunk Rerank`, `chunk_rescorer`, `9 of 9`. Watch for doubled consonants ("Serrverless"-type errors) and proofread every label letter by letter before delivering; regenerate rather than deliver a misspelled frame.
+
+**Exclusions:** No legend, caption box, title, footnote, colour key, or any explanatory text block. No logos, brand marks, icons of real products, or watermarks. Only the nodes, arrows, and labels listed above appear in the frame.

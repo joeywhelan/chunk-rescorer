@@ -1,0 +1,19 @@
+# Section 4 — Load and Index the Corpus
+
+A dark-themed technical diagram (900×300px, 3:1 ratio, delivered as PNG) illustrating the corpus and its ingest: twelve product manuals, nine long and three short, with every long manual's troubleshooting section sitting below the reranker's cap, loaded into one Elasticsearch index. Dark charcoal background (#0D1117), flat vector rendering, no 3D effects, at least 5% clear margin on every edge. Colours: Elastic teal (#00BFB3) for Elasticsearch components and the chunk-rerank path, light blue (#1BA9F5) for text the reranker reads, desaturated slate grey for text it never reads, pink (#F04E98) only for the cap line or a rejection, yellow (#FEC514) only for the answer. Labels in a clean monospaced face, grey unless noted.
+
+**Key components (left to right):**
+
+- **Left: twelve manual icons** — tall narrow rectangles standing on a common baseline, drawn as documents seen edge-on. Nine are tall, arranged in three groups of three with a small gap between groups, labelled beneath the groups "pressure washer", "garage door opener", "portable generator". Three are short, about a third of the height, grouped at the right of the row and labelled beneath "short manuals".
+- **Cap line** — one thin horizontal pink line crossing all twelve icons at about a third of the tall icons' height from the top, labelled at its left end "8,192-token cap". Above the line the icons are light blue; below it the tall icons are slate grey. The three short icons end above the line.
+- **Troubleshooting band** — a thin yellow band near the bottom of each tall icon, well below the pink line, labelled once beneath the middle group "troubleshooting".
+- **Arrow** — solid horizontal line from the row of icons to the index, labelled "bulk index".
+- **Right: Elasticsearch index** — rounded rectangle in teal with a faint teal border glow, labelled "manuals" with sub-label "12 documents". Inside it, two stacked field chips: "content (text)" in light blue and "category (keyword)" in teal.
+
+**Design principle:**
+The image communicates a single idea: "in every long manual, the troubleshooting section that answers a customer's question lies below the line the reranker reads to." The yellow bands must all sit clearly below the pink line.
+
+**Text accuracy:**
+Every string must be copied character-for-character; the only permitted strings in the frame are: `pressure washer`, `garage door opener`, `portable generator`, `short manuals`, `8,192-token cap`, `troubleshooting`, `bulk index`, `manuals`, `12 documents`, `content (text)`, `category (keyword)`. Watch for doubled consonants ("Serrverless"-type errors) and proofread every label letter by letter before delivering; regenerate rather than deliver a misspelled frame.
+
+**Exclusions:** No legend, caption box, title, footnote, colour key, or any explanatory text block. No logos, brand marks, icons of real products, or watermarks. Only the nodes, arrows, and labels listed above appear in the frame.

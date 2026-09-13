@@ -1,0 +1,19 @@
+# Section 5 — Two Retriever Configurations
+
+A dark-themed technical diagram (900×300px, 3:1 ratio, delivered as PNG) illustrating two ways of feeding the same three manuals to a reranker: whole, so it reads only the top of each, or through a chunk rescorer that sends one small chunk per manual. Dark charcoal background (#0D1117), flat vector rendering, no 3D effects, at least 5% clear margin on every edge. Colours: Elastic teal (#00BFB3) for Elasticsearch components and the chunk-rerank path, light blue (#1BA9F5) for text the reranker reads, desaturated slate grey for text it never reads, pink (#F04E98) only for the cap line or a rejection, yellow (#FEC514) only for the answer. Labels in a clean monospaced face, grey unless noted.
+
+**Key components (left to right):**
+
+- **Left: three manual icons** — tall narrow document rectangles side by side, light blue above a thin horizontal pink line at a third of their height, slate grey below, each with a small yellow band near the bottom. No label on the line.
+- **Two lanes to the right**, stacked, each ending at its own copy of the reranker box:
+  - **Top lane, labelled "Rerank" at its left in light blue** — a thick light-blue arrow from the three icons directly to the reranker, labelled "3 whole manuals" above and "~59,000 tokens" below. At the reranker end, a small pink tick with the label "reads first 8,192 tokens".
+  - **Bottom lane, labelled "Chunk Rerank" at its left in teal** — a teal arrow from the three icons into a rounded teal box with a bright teal glow labelled "chunk_rescorer"; out of it, three small yellow chips in a row, then a thin teal arrow to the reranker labelled "3 chunks" above and "~1,200 tokens" below.
+- **Right: reranker boxes** — two identical rounded rectangles in teal, one per lane, each labelled ".jina-reranker-v3.5".
+
+**Design principle:**
+The image communicates a single idea: "same manuals, same reranker, different input: the top lane hands it three whole manuals and it reads only the blue part; the bottom lane hands it the three yellow answers." The bottom lane's arrow into the reranker must be visibly thinner than the top lane's.
+
+**Text accuracy:**
+Every string must be copied character-for-character; the only permitted strings in the frame are: `Rerank`, `3 whole manuals`, `~59,000 tokens`, `reads first 8,192 tokens`, `Chunk Rerank`, `chunk_rescorer`, `3 chunks`, `~1,200 tokens`, `.jina-reranker-v3.5`. Watch for doubled consonants ("Serrverless"-type errors) and proofread every label letter by letter before delivering; regenerate rather than deliver a misspelled frame.
+
+**Exclusions:** No legend, caption box, title, footnote, colour key, or any explanatory text block. No logos, brand marks, icons of real products, or watermarks. Only the nodes, arrows, and labels listed above appear in the frame.

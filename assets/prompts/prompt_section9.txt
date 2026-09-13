@@ -1,0 +1,19 @@
+# Section 9 — When the Answer Is Already in View
+
+A dark-themed technical diagram (900×300px, 3:1 ratio, delivered as PNG) illustrating the one case where whole documents beat chunks: the answer sits near the top of the manual, above the cap, and a single chunk loses the document-level context that a whole-document reranker keeps. Dark charcoal background (#0D1117), flat vector rendering, no 3D effects, at least 5% clear margin on every edge. Colours: Elastic teal (#00BFB3) for Elasticsearch components and the chunk-rerank path, light blue (#1BA9F5) for text the reranker reads, desaturated slate grey for text it never reads, pink (#F04E98) only for the cap line or a rejection, yellow (#FEC514) only for the answer. Labels in a clean monospaced face, grey unless noted.
+
+**Key components (left to right):**
+
+- **Left: three manual icons** — tall narrow document rectangles, light blue above a thin horizontal pink line at a third of their height, slate grey below. In each, a yellow band sits near the top, above the pink line; the pink line is labelled at its left "8,192-token cap" and the bands are labelled once above the icons "answer in view".
+- **Two lanes to the right**, stacked:
+  - **Top lane, labelled "Rerank" in light blue** — a light-blue arrow carrying three light-blue rectangles (the visible tops of the manuals, each with its yellow band) to the result "3 of 3" in light blue.
+  - **Bottom lane, labelled "Chunk Rerank" in teal** — a teal arrow carrying three small chips: one yellow chip labelled beneath "camera", and two grey chips each labelled beneath "battery backup". The arrow ends at the result "2 of 3" in grey.
+- The two grey chips must look alike and sit close together, and the yellow chip must sit apart, so the eye sees that two manuals contributed the same kind of passage and the reranker had nothing else to judge by.
+
+**Design principle:**
+The image communicates a single idea: "when the answer is already in the part the reranker reads, sending the whole document keeps the context and sending one chunk throws it away." This is the caveat panel; it should feel calmer and more even-handed than the earlier panels, with no pink rejection marks.
+
+**Text accuracy:**
+Every string must be copied character-for-character; the only permitted strings in the frame are: `8,192-token cap`, `answer in view`, `Rerank`, `3 of 3`, `Chunk Rerank`, `camera`, `battery backup`, `2 of 3`. Watch for doubled consonants ("Serrverless"-type errors) and proofread every label letter by letter before delivering; regenerate rather than deliver a misspelled frame.
+
+**Exclusions:** No legend, caption box, title, footnote, colour key, or any explanatory text block. No logos, brand marks, icons of real products, or watermarks. Only the nodes, arrows, and labels listed above appear in the frame.

@@ -1,0 +1,20 @@
+# Section 7 — The Request Limit
+
+A dark-themed technical diagram (900×300px, 3:1 ratio, delivered as PNG) illustrating the reranker's request limit: twelve whole manuals do not fit through it and the request is rejected, while twelve chunks pass through and are ranked. Dark charcoal background (#0D1117), flat vector rendering, no 3D effects, at least 5% clear margin on every edge. Colours: Elastic teal (#00BFB3) for Elasticsearch components and the chunk-rerank path, light blue (#1BA9F5) for text the reranker reads, desaturated slate grey for text it never reads, pink (#F04E98) only for the cap line or a rejection, yellow (#FEC514) only for the answer. Labels in a clean monospaced face, grey unless noted.
+
+**Key components (left to right):**
+
+- **Left: twelve manual icons** — a compact row of tall narrow document rectangles in slate grey with light-blue tops, labelled beneath "12 manuals" and "~228,000 tokens".
+- **Centre: the limit** — a tall vertical gate drawn as two pink brackets with a gap between them, labelled above "200,000-token limit".
+- **Two lanes through the gate**, stacked:
+  - **Top lane, labelled "Rerank" at its left in light blue** — a thick light-blue arrow from the icons toward the gate that stops short of it, ending in a pink stop mark (a circle with a bar), labelled "400 rejected" in pink. Nothing continues past the gate on this lane.
+  - **Bottom lane, labelled "Chunk Rerank" at its left in teal** — a teal arrow from the icons into a rounded teal box with a bright glow labelled "chunk_rescorer"; out of it a row of twelve tiny yellow chips labelled beneath "12 chunks" and "~5,000 tokens", passing cleanly through the gate's gap to the reranker.
+- **Right: reranker box** — rounded rectangle in teal labelled ".jina-reranker-v3.5". Beneath it, one yellow chip pulled slightly forward with the label "RG-3200P first".
+
+**Design principle:**
+The image communicates a single idea: "whole documents cannot even be submitted at this scale; chunks make the same request small enough to rank the whole catalog." The top lane must visibly stop before the gate; the bottom lane must visibly pass through it.
+
+**Text accuracy:**
+Every string must be copied character-for-character; the only permitted strings in the frame are: `12 manuals`, `~228,000 tokens`, `200,000-token limit`, `Rerank`, `400 rejected`, `Chunk Rerank`, `chunk_rescorer`, `12 chunks`, `~5,000 tokens`, `.jina-reranker-v3.5`, `RG-3200P first`. Watch for doubled consonants ("Serrverless"-type errors) and proofread every label letter by letter before delivering; regenerate rather than deliver a misspelled frame.
+
+**Exclusions:** No legend, caption box, title, footnote, colour key, or any explanatory text block. No logos, brand marks, icons of real products, or watermarks. Only the nodes, arrows, and labels listed above appear in the frame.

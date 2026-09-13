@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Your Reranker Never Sees</title>
+<style>
+  :root {
+    --bg: #0D1117;
+    --panel: #121A24;
+    --line: #1F2A37;
+    --text: #E6EDF3;
+    --muted: #9AA7B4;
+    --teal: #00BFB3;
+    --blue: #1BA9F5;
+    --yellow: #FEC514;
+    --pink: #F04E98;
+    --grey: #5B6B7B;
+    --font: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    --mono: "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+  }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font-family: var(--font); overflow: hidden; }
+
+  /* Fixed 1600x900 stage scaled to fit the window: layout is deterministic. */
+  #stage { position: absolute; left: 50%; top: 50%; width: 1600px; height: 900px; transform-origin: 0 0; }
+  .slide { position: absolute; inset: 0; padding: 56px 80px 110px 80px; box-sizing: border-box; display: none; flex-direction: column; }
+  .slide.active { display: flex; }
+
+  .kicker { color: var(--teal); font-size: 20px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; margin: 0 0 10px; }
+  h1 { font-size: 40px; line-height: 1.12; margin: 0 0 18px; font-weight: 700; }
+  h1 .accent { color: var(--teal); }
+  h2 { font-size: 24px; margin: 0 0 8px; font-weight: 600; }
+  p, li { font-size: 21px; line-height: 1.38; }
+  ul { margin: 0; padding-left: 28px; }
+  li { margin: 0 0 8px; }
+  li b { color: var(--text); }
+  .muted { color: var(--muted); }
+  .teal { color: var(--teal); } .blue { color: var(--blue); } .yellow { color: var(--yellow); } .pink { color: var(--pink); }
+
+  .row { display: flex; gap: 40px; flex: 1; min-height: 0; }
+  .col { flex: 1; min-width: 0; }
+  .figure { display: block; width: 100%; height: auto; border-radius: 10px; }
+  .figure.wide { width: 1000px; margin: 0 auto 18px; }
+
+  table.results { border-collapse: collapse; font-family: var(--mono); font-size: 16px; width: 100%; }
+  table.results th, table.results td { padding: 5px 9px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  table.results th { color: var(--muted); font-weight: 500; }
+  table.results td:first-child, table.results th:first-child { text-align: left; }
+  table.results tr.win td { color: var(--teal); }
+  table.results tr.total td { font-weight: 700; border-top: 2px solid var(--line); border-bottom: none; }
+
+  .stats { display: flex; gap: 24px; margin-top: 8px; }
+  .stat { flex: 1; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px; }
+  .stat .n { font-size: 40px; font-weight: 700; line-height: 1; }
+  .stat .l { color: var(--muted); font-size: 18px; margin-top: 6px; }
+
+  pre { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin: 0; font-family: var(--mono); font-size: 17px; line-height: 1.3; color: var(--text); overflow: hidden; }
+  pre .k { color: var(--blue); } pre .v { color: var(--yellow); } pre .c { color: var(--muted); } pre .hl { color: var(--teal); font-weight: 700; }
+
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 22px; }
+  .card h2 { margin-bottom: 8px; }
+  .card ul { padding-left: 24px; }
+  .card li { font-size: 20px; margin-bottom: 5px; }
+
+  /* Title slide */
+  #s1 { padding: 0; }
+  #s1 .cover { position: absolute; inset: 0; background: url("assets/images/cover.png") center / cover no-repeat; }
+  #s1 .shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(13,17,23,.92) 0%, rgba(13,17,23,.75) 45%, rgba(13,17,23,.15) 100%); }
+  #s1 .titlebox { position: absolute; left: 90px; top: 200px; width: 860px; }
+  #s1 h1 { font-size: 68px; margin-bottom: 24px; }
+  #s1 .sub { font-size: 28px; color: var(--text); line-height: 1.35; margin-bottom: 40px; }
+  #s1 .who { font-size: 22px; color: var(--muted); }
+
+  /* Chrome: brand, progress, controls. Content area ends at 790px; chrome lives below 810px. */
+  .brand { position: absolute; left: 80px; bottom: 40px; display: flex; align-items: center; gap: 12px; font-size: 20px; color: var(--muted); }
+  .brand .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 12px var(--teal); }
+  .brand b { color: var(--text); font-weight: 700; }
+  .controls { position: absolute; right: 80px; bottom: 30px; display: flex; align-items: center; gap: 14px; }
+  .controls button { background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 10px; width: 52px; height: 44px; font-size: 22px; cursor: pointer; }
+  .controls button:hover { border-color: var(--teal); color: var(--teal); }
+  .controls .count { font-family: var(--mono); font-size: 20px; color: var(--muted); min-width: 80px; text-align: center; }
+  .progress { position: absolute; left: 0; bottom: 0; height: 5px; background: var(--teal); width: 0; transition: width .25s; }
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- 1. Title -->
+  <section class="slide" id="s1">
+    <div class="cover"></div><div class="shade"></div>
+    <div class="titlebox">
+      <p class="kicker">Elasticsearch · text_similarity_reranker · chunk_rescorer</p>
+      <h1>What Your Reranker <span class="accent">Never Sees</span></h1>
+      <p class="sub">Cross-encoder rerankers stop reading long documents part-way through. <span class="teal">chunk_rescorer</span> sends them the passage that matters instead.</p>
+      <p class="who">A live demo on Elastic Cloud Serverless with the Elastic Inference Service and jina-reranker-v3.5</p>
+    </div>
+  </section>
+
+  <!-- 2. The cap -->
+  <section class="slide" id="s2">
+    <p class="kicker">The problem</p>
+    <h1>Rerankers read the first ~8,000 tokens and discard the rest</h1>
+    <img class="figure wide" src="assets/images/section3.png" alt="Marker positions on a 14,000-token document; seen up to 7,500, not seen at 9,000 and 12,000">
+    <div class="row">
+      <div class="col">
+        <ul>
+          <li>A cross-encoder reranker takes the <b>query and the document text together</b> and scores them jointly. That is why it beats vector similarity, and why it has a hard input limit.</li>
+          <li>jina-reranker-v3.5 on EIS reads about <b>8,192 tokens</b> per document. Past that, the content is dropped, not sampled.</li>
+          <li>Measured live: the same filler document with the answer at five depths. Seen at 2,000, 6,000 and 7,500 tokens. <b class="pink">Invisible at 9,000 and 12,000.</b></li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="card">
+          <h2>Why it matters</h2>
+          <ul>
+            <li>~8,000 tokens is roughly <b>25 pages</b>.</li>
+            <li>Manuals, contracts, policies and specs put the answer at the back.</li>
+            <li>The retriever can find the document. <b>The reranker then judges it on the wrong pages.</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. The demo -->
+  <section class="slide" id="s3">
+    <p class="kicker">The demo</p>
+    <h1>A hardware retailer's support search, end to end on Serverless</h1>
+    <div class="row">
+      <div class="col" style="flex: 1.25">
+        <img class="figure" src="assets/images/arch.png" alt="Architecture: notebook, Terraform, Serverless project, nested retriever with chunk_rescorer, manuals index, EIS">
+      </div>
+      <div class="col">
+        <ul>
+          <li><b>Scenario.</b> A shopper types a symptom. The right answer is the manual whose troubleshooting section lists that fault.</li>
+          <li><b>Corpus.</b> Twelve synthetic manuals: three categories of three same-brand models, plus three short ones. Siblings share their first 8,000 tokens almost word for word.</li>
+          <li><b>The catch.</b> Every long manual's troubleshooting section starts <b class="pink">past the cap</b>, at 11,700 to 26,000 tokens in.</li>
+          <li><b>Stack.</b> Terraform provisions the project. One notebook indexes, queries and tears down. All calls go through the Python client; the reranker is the preconfigured EIS endpoint.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Two configurations -->
+  <section class="slide" id="s4">
+    <p class="kicker">Two configurations, same query, same three manuals</p>
+    <h1><span class="blue">Rerank</span> sends whole manuals. <span class="teal">Chunk Rerank</span> sends the best chunk of each.</h1>
+    <img class="figure wide" src="assets/images/section5.png" alt="Rerank lane: 3 whole manuals, ~59,000 tokens. Chunk Rerank lane: chunk_rescorer, 3 chunks, ~1,200 tokens">
+    <div class="row">
+      <div class="col" style="flex: 1.15">
+<pre>{<span class="k">"text_similarity_reranker"</span>: {
+  <span class="k">"retriever"</span>: { <span class="c">standard: category filter + match on content</span> },
+  <span class="k">"field"</span>: <span class="v">"content"</span>,  <span class="k">"inference_id"</span>: <span class="v">".jina-reranker-v3.5"</span>,
+  <span class="k">"inference_text"</span>: <span class="v">query</span>,  <span class="k">"rank_window_size"</span>: <span class="v">3</span>,
+  <span class="hl">"chunk_rescorer"</span>: { <span class="k">"size"</span>: <span class="v">1</span>,
+    <span class="k">"chunking_settings"</span>: { <span class="k">"strategy"</span>: <span class="v">"sentence"</span>,
+      <span class="k">"max_chunk_size"</span>: <span class="v">300</span>, <span class="k">"sentence_overlap"</span>: <span class="v">1</span> } }
+}}</pre>
+      </div>
+      <div class="col">
+        <ul>
+          <li>One option on the retriever. <b>No re-indexing, the index is untouched.</b></li>
+          <li>On the shard, each manual is split into 300-word chunks, every chunk is scored against the query lexically, and only the best one goes to the reranker.</li>
+          <li>Set <b>chunking_settings</b> explicitly. The service default is 7,000-word chunks, which are themselves over the cap.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Results -->
+  <section class="slide" id="s5">
+    <p class="kicker">Nine symptom queries, three manuals each</p>
+    <h1>Whole manuals: a coin toss. Best chunk: nine for nine, ten times faster.</h1>
+    <div class="row">
+      <div class="col" style="flex: 0 0 880px">
+        <table class="results">
+          <tr><th>query</th><th>answer</th><th class="blue">Rerank</th><th>margin</th><th>ms</th><th class="teal">Chunk Rerank</th><th>margin</th><th>ms</th></tr>
+          <tr><td>pw-inlet-screen</td><td>RG-2600P</td><td>#1</td><td>+0.09</td><td>1,716</td><td>#1</td><td>+0.43</td><td>121</td></tr>
+          <tr><td>pw-weep-hole</td><td>RG-3200P</td><td>#1</td><td>+0.03</td><td>1,736</td><td>#1</td><td>+0.57</td><td>113</td></tr>
+          <tr><td>pw-milky-oil</td><td>RG-4000P</td><td class="pink">#3</td><td>-0.06</td><td>1,763</td><td>#1</td><td>+0.64</td><td>116</td></tr>
+          <tr><td>gdo-chain-sag</td><td>KG-800C</td><td class="pink">#2</td><td>-0.25</td><td>1,844</td><td>#1</td><td>+0.37</td><td>120</td></tr>
+          <tr><td>gdo-3-1-pattern</td><td>KG-1200B</td><td class="pink">#2</td><td>-0.01</td><td>1,859</td><td>#1</td><td>+0.45</td><td>131</td></tr>
+          <tr><td>gdo-camera-black</td><td>KG-1500W</td><td>#1</td><td>+0.03</td><td>1,818</td><td>#1</td><td>+0.60</td><td>113</td></tr>
+          <tr><td>gen-fuel-valve-detent</td><td>RG-4500E</td><td class="pink">#3</td><td>-0.16</td><td>1,754</td><td>#1</td><td>+0.66</td><td>125</td></tr>
+          <tr><td>gen-twistlock-breaker</td><td>RG-7500E</td><td class="pink">#3</td><td>-0.11</td><td>1,732</td><td>#1</td><td>+0.04</td><td>130</td></tr>
+          <tr><td>gen-propane-stall</td><td>RG-10000D</td><td>#1</td><td>+0.42</td><td>1,967</td><td>#1</td><td>+0.56</td><td>116</td></tr>
+          <tr class="total"><td>correct manual first</td><td></td><td class="blue">4 of 9</td><td></td><td>1,763</td><td class="teal">9 of 9</td><td></td><td>120</td></tr>
+        </table>
+      </div>
+      <div class="col">
+        <ul>
+          <li><b class="blue">Rerank</b> gets four of nine, two of them by a near tie. With three near-identical heads, that is guessing.</li>
+          <li>Its one clear win names a feature only one model has in its title. <b>Faults live past the cap; features do not.</b></li>
+          <li><b class="teal">Chunk Rerank</b> gets all nine, most by margins of 0.4 to 0.7, because the chunk it sends is the troubleshooting entry itself.</li>
+          <li>Each request carries about 1,200 tokens instead of three whole manuals: <b>~120 ms versus ~1.8 s</b>, and the inference bill drops with it.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Request limit -->
+  <section class="slide" id="s6">
+    <p class="kicker">Widen the window to the whole catalog</p>
+    <h1>Whole documents cannot even be submitted at scale. Chunks can.</h1>
+    <img class="figure wide" src="assets/images/section7.png" alt="12 manuals, ~228,000 tokens: Rerank rejected at the 200,000-token limit; Chunk Rerank passes 12 chunks through">
+    <div class="row">
+      <div class="col">
+        <ul>
+          <li>Drop the category filter, set the window to all twelve manuals, about 228,000 tokens.</li>
+          <li><b class="pink">Rerank is rejected before inference:</b> <span class="muted">"Request too large; estimated total tokens exceed the maximum limit of 200,000."</span></li>
+          <li><b class="teal">Chunk Rerank</b> sends twelve chunks, about 5,000 tokens, and ranks the catalog correctly in 269 ms. The right manual is first by 0.69.</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="card">
+          <h2>The takeaway</h2>
+          <ul>
+            <li>With whole documents, the rerank window is capped at a handful of long candidates by the request limit.</li>
+            <li>With chunks, the window can be as wide as the first stage returns.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. semantic_text -->
+  <section class="slide" id="s7">
+    <p class="kicker">The obvious objection</p>
+    <h1>"Just use semantic_text." It finds the manual. The reranker still reads the whole thing.</h1>
+    <img class="figure wide" src="assets/images/section8.png" alt="manuals_semantic index with chunk vectors: semantic only 8 of 9, Rerank fetches the whole text 4 of 9, Chunk Rerank 9 of 9">
+    <div class="row">
+      <div class="col">
+        <ul>
+          <li>Same manuals indexed as <b>semantic_text</b>, chunked and embedded at ingest. The semantic query scores each manual by its best chunk and finds the buried entry: <b class="teal">8 of 9</b>.</li>
+          <li>Put the whole-document reranker on top and it falls to <b class="pink">4 of 9</b>, with margins identical to the plain text field, query for query.</li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul>
+          <li><b>Why.</b> Vectors chose the window. A cross-encoder reads text, not vectors, so the retriever fetches the whole original text and truncates it exactly as before.</li>
+          <li>Add chunk_rescorer and it is <b class="teal">9 of 9</b> again. Retrieval chunking and reranking chunking are separate decisions.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. When whole documents win -->
+  <section class="slide" id="s8">
+    <p class="kicker">The one caveat</p>
+    <h1>When the answer is already in view, whole documents can do better</h1>
+    <img class="figure wide" src="assets/images/section9.png" alt="Answer above the cap line: Rerank 3 of 3; Chunk Rerank 2 of 3, camera chip versus two battery-backup chips">
+    <div class="row">
+      <div class="col">
+        <ul>
+          <li>Three spec queries answered near the front of the manual, inside the visible range. <b class="blue">Rerank: 3 of 3.</b> <b class="teal">Chunk Rerank: 2 of 3.</b></li>
+          <li>The miss: "garage door opener with built-in camera and battery backup." Only one model has a camera; all three have battery backup.</li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul>
+          <li>Chunk selection is per manual. The siblings each contribute a dense battery-backup passage, and no single passage can say <i>this manual never mentions a camera</i>.</li>
+          <li><b>Chunking trades document-level context for one passage.</b> That trade pays when the passage is out of view, and only then.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Two ways -->
+  <section class="slide" id="s9">
+    <p class="kicker">Two places to chunk</p>
+    <h1>Query-time chunking keeps the document as the unit. Ingest-time chunking makes the chunk the record.</h1>
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <h2 class="teal">Elasticsearch chunk_rescorer, at query time</h2>
+          <ul>
+            <li><b>Pro.</b> No re-indexing: one option on a text field you already have.</li>
+            <li><b>Pro.</b> Results are still documents, with their metadata.</li>
+            <li><b>Pro.</b> Retrieval chunking and reranking chunking are tuned independently.</li>
+            <li><b>Con.</b> Chunk selection is lexical: the customer's words must appear in the passage.</li>
+            <li><b>Con.</b> Chunking is redone per query for each document in the window.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <h2 class="muted">Other platforms: chunk at ingest, rank chunks</h2>
+          <ul>
+            <li><b>Pro.</b> The reranker limit is a non-issue by construction.</li>
+            <li><b>Pro.</b> Chunking is done once and can follow document layout.</li>
+            <li><b>Con.</b> The corpus must be re-indexed as chunks first.</li>
+            <li><b>Con.</b> Results are chunks. Reassembling ranked, deduplicated documents is your code.</li>
+            <li><b>Con.</b> Per-record limits on such rankers are far tighter than a document.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Takeaways -->
+  <section class="slide" id="s10">
+    <p class="kicker">Takeaways</p>
+    <h1>Chunk what the reranker reads, whatever the first stage is</h1>
+    <div class="stats">
+      <div class="stat"><div class="n"><span class="blue">4</span> <span class="muted">→</span> <span class="teal">9</span> of 9</div><div class="l">correct manual first, nine symptom queries</div></div>
+      <div class="stat"><div class="n"><span class="teal">~10×</span></div><div class="l">less rerank time and payload</div></div>
+      <div class="stat"><div class="n"><span class="pink">400</span> <span class="muted">→</span> <span class="teal">ranked</span></div><div class="l">whole catalog in one request</div></div>
+      <div class="stat"><div class="n"><span class="teal">9</span> of 9</div><div class="l">on semantic_text too</div></div>
+    </div>
+    <div class="row" style="margin-top: 26px">
+      <div class="col">
+        <ul>
+          <li><b>The cap is a property of what the reranker is sent</b>, not of how the index was built. semantic_text does not exempt you.</li>
+          <li><b>Recommended configuration.</b> Explicit sentence chunking at ~300 words with one sentence of overlap, one chunk per document, no top_n on the endpoint. Read ranks and gaps within a request, never scores across requests.</li>
+          <li><b>Skip it</b> when your answers live in the visible head. Then whole documents are as good or better.</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="card">
+          <h2>Try it</h2>
+          <ul>
+            <li>Notebook, Terraform, corpus and article: <span class="teal">github.com/joeywhelan/chunk-rescorer</span></li>
+            <li>Runs on any Elastic Cloud Serverless project. The reranker endpoint is preconfigured; no third-party keys.</li>
+            <li>Bring your own long documents. If the answers are past page 25, this is your fix.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="brand"><span class="dot"></span><span><b>Elastic</b> · Search AI</span></div>
+  <div class="controls">
+    <button id="prev" aria-label="Previous slide">&#8592;</button>
+    <span class="count" id="count">1 / 10</span>
+    <button id="next" aria-label="Next slide">&#8594;</button>
+  </div>
+  <div class="progress" id="progress"></div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const stage = document.getElementById('stage');
+  let i = Math.max(0, Math.min(slides.length - 1, (parseInt(location.hash.slice(1), 10) || 1) - 1));
+
+  function fit() {
+    const s = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+    stage.style.transform = `translate(-50%, -50%) scale(${s})`;
+    stage.style.transformOrigin = '50% 50%';
+  }
+  function show(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach((el, k) => el.classList.toggle('active', k === i));
+    document.getElementById('count').textContent = `${i + 1} / ${slides.length}`;
+    document.getElementById('progress').style.width = `${((i + 1) / slides.length) * 100}%`;
+    history.replaceState(null, '', `#${i + 1}`);
+  }
+  document.getElementById('prev').onclick = () => show(i - 1);
+  document.getElementById('next').onclick = () => show(i + 1);
+  window.addEventListener('keydown', e => {
+    if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); show(i + 1); }
+    if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(i - 1); }
+    if (e.key === 'Home') show(0);
+    if (e.key === 'End') show(slides.length - 1);
+  });
+  window.addEventListener('resize', fit);
+  window.addEventListener('hashchange', () => show((parseInt(location.hash.slice(1), 10) || 1) - 1));
+  fit(); show(i);
+
+  // Layout check (used during authoring): ?check reports any slide whose content
+  // extends below the reserved chrome band (y > 790 in stage coordinates).
+  if (location.search.includes('check')) {
+    window.addEventListener('load', () => {
+      const bad = [];
+      slides.forEach((el, k) => {
+        if (k === 0) return;
+        el.classList.add('active');
+        el.querySelectorAll('*').forEach(node => {
+          const r = node.getBoundingClientRect(), sr = stage.getBoundingClientRect();
+          const scale = sr.width / 1600;
+          const bottom = (r.bottom - sr.top) / scale, right = (r.right - sr.left) / scale;
+          if (node.offsetParent && (bottom > 792 || right > 1600)) bad.push(`${k + 1}:${node.tagName}:${Math.round(bottom)}`);
+          if (node.offsetParent && node.scrollWidth > node.clientWidth + 1) bad.push(`${k + 1}:${node.tagName}:wide`);
+        });
+        el.classList.toggle('active', k === i);
+      });
+      document.title = bad.length ? 'OVERFLOW ' + bad.join(' ') : 'OK';
+    });
+  }
+</script>
+</body>
+</html>

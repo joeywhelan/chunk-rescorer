@@ -1,0 +1,20 @@
+# Section 6 — Run the Queries
+
+A dark-themed technical diagram (900×300px, 3:1 ratio, delivered as PNG) illustrating the scorecard of nine symptom queries run through two configurations: one gets the right manual first four times, the other nine times, in a tenth of the time. Dark charcoal background (#0D1117), flat vector rendering, no 3D effects, at least 5% clear margin on every edge. Colours: Elastic teal (#00BFB3) for Elasticsearch components and the chunk-rerank path, light blue (#1BA9F5) for text the reranker reads, desaturated slate grey for text it never reads, pink (#F04E98) only for the cap line or a rejection, yellow (#FEC514) only for the answer. Labels in a clean monospaced face, grey unless noted.
+
+**Key components (left to right):**
+
+- **Left: query stack** — nine small rounded chips in grey stacked in three columns of three, labelled beneath "9 symptom queries".
+- **Two arrows** — from the stack, one light-blue arrow up-right to the top meter and one teal arrow down-right to the bottom meter. No labels on the arrows.
+- **Centre and right: two horizontal meters**, stacked, each a long rounded track spanning about 55% of the width:
+  - **Top meter, labelled at its left "Rerank" in light blue** — the track is divided into nine equal segments; four are filled light blue, five are empty grey outlines. At its right end the label "4 of 9" and beneath it in smaller grey "median 1,763 ms".
+  - **Bottom meter, labelled at its left "Chunk Rerank" in teal** — nine segments, all filled teal with a faint glow. At its right end the label "9 of 9" and beneath it in smaller grey "median 120 ms".
+- **Small caption beneath both meters, centred, in grey** — "correct manual ranked first".
+
+**Design principle:**
+The image communicates a single idea: "on the same nine questions, whole-document reranking is a coin toss among three and chunk reranking is nine for nine, and faster." The nine-segment tracks must be identical in size so the fill difference carries the message.
+
+**Text accuracy:**
+Every string must be copied character-for-character; the only permitted strings in the frame are: `9 symptom queries`, `Rerank`, `4 of 9`, `median 1,763 ms`, `Chunk Rerank`, `9 of 9`, `median 120 ms`, `correct manual ranked first`. Watch for doubled consonants ("Serrverless"-type errors) and proofread every label letter by letter before delivering; regenerate rather than deliver a misspelled frame.
+
+**Exclusions:** No legend, caption box, title, footnote, colour key, or any explanatory text block. No logos, brand marks, icons of real products, or watermarks. Only the nodes, arrows, and labels listed above appear in the frame.

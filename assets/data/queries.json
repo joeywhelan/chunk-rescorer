@@ -1,0 +1,159 @@
+{
+  "description": "Static evaluation set for the demo. The corpus is three clusters of three same-brand models plus three short manuals. Each symptom query is answered by exactly one model's troubleshooting section (the `entry`, written into that manual at generation time and absent from its siblings). `unique_terms` must appear only in the target manual; check with `uv run python src/chunk_rescorer/check_queries.py`. Spec queries are answered near the front of a manual, where the reranker sees the text with or without chunk_rescorer.",
+  "clusters": {
+    "pressure washer": {
+      "brand": "Ridgeline Outdoor Power",
+      "models": [
+        "RG-2600P",
+        "RG-3200P",
+        "RG-4000P"
+      ]
+    },
+    "garage door opener": {
+      "brand": "Kestrel Home Systems",
+      "models": [
+        "KG-800C",
+        "KG-1200B",
+        "KG-1500W"
+      ]
+    },
+    "portable generator": {
+      "brand": "Ridgeline Outdoor Power",
+      "models": [
+        "RG-4500E",
+        "RG-7500E",
+        "RG-10000D"
+      ]
+    }
+  },
+  "symptom_queries": [
+    {
+      "id": "pw-inlet-screen",
+      "cluster": "pressure washer",
+      "target": "RG-2600P",
+      "query": "pressure washer water flow drops off after a few minutes, inlet filter screen collapsed",
+      "entry": "Problem: Water flow at the nozzle drops off after a few minutes of spraying, and the garden hose inlet filter screen (part RP-IS-26) is found collapsed inward when the supply hose is removed.\nPossible cause: The RP-IS-26 filter screen was installed with its dome facing inward, so supply pressure folds it into the inlet passage and chokes flow as the pump warms.\nCorrective action: Shut off the engine and water supply, unscrew the garden hose from the pump inlet, remove the RP-IS-26 screen, reshape or replace it, and reinstall it with the dome facing outward toward the hose before reconnecting.",
+      "unique_terms": [
+        "RP-IS-26",
+        "dome facing",
+        "collapsed inward"
+      ]
+    },
+    {
+      "id": "pw-weep-hole",
+      "cluster": "pressure washer",
+      "target": "RG-3200P",
+      "query": "pressure washer pump drips from weep hole when trigger released",
+      "entry": "Problem: Water drips steadily from the weep hole on the underside of the pump whenever the spray gun trigger is released, although spraying pressure is normal.\nPossible cause: The pump's low-pressure seals (seal kit RP-LS-32) are worn; the weep hole is designed to vent water that passes a worn seal so it does not reach the crankcase.\nCorrective action: Stop the engine, relieve pressure by squeezing the trigger, remove the four pump manifold bolts, replace the low-pressure seals with kit RP-LS-32, apply the supplied silicone grease to the plungers, reassemble, and confirm the weep hole stays dry.",
+      "unique_terms": [
+        "RP-LS-32",
+        "weep hole",
+        "seal kit"
+      ]
+    },
+    {
+      "id": "pw-milky-oil",
+      "cluster": "pressure washer",
+      "target": "RG-4000P",
+      "query": "pressure washer pump oil looks milky in the sight glass",
+      "entry": "Problem: The oil in the triplex pump's sight glass has turned milky or cloudy white, and the pump runs noticeably louder.\nPossible cause: Water has passed the plunger seals into the pump crankcase and emulsified with the pump oil; the milky appearance in the sight glass is the first sign of seal wear on the triplex pump.\nCorrective action: Stop the engine, drain the pump crankcase through the drain plug, replace the plunger seals, refill with 12 ounces of Ridgeline RP-PO-40 pump oil to the center of the sight glass, and check the sight glass again after one hour of use.",
+      "unique_terms": [
+        "RP-PO-40",
+        "sight glass",
+        "milky"
+      ]
+    },
+    {
+      "id": "gdo-chain-sag",
+      "cluster": "garage door opener",
+      "target": "KG-800C",
+      "query": "garage door opener chain sagging and slapping the rail, door jerks at the top",
+      "entry": "Problem: The drive chain sags below the rail, slaps against it during travel, and the door jerks as it reaches the top of its travel.\nPossible cause: The chain has stretched with use and the chain tension bolt (part KC-TB-8) at the trolley has not been readjusted; a chain that hangs more than a quarter inch below the rail will skip on the sprocket.\nCorrective action: Disconnect power, tighten the KC-TB-8 chain tension bolt with a 7/16-inch wrench until the chain rides a quarter inch above the base of the rail, cycle the door twice, and recheck the sag.",
+      "unique_terms": [
+        "KC-TB-8",
+        "chain sags",
+        "chain tension bolt"
+      ]
+    },
+    {
+      "id": "gdo-3-1-pattern",
+      "cluster": "garage door opener",
+      "target": "KG-1200B",
+      "query": "garage door only opens halfway and opener light flashes 3-1 pattern",
+      "entry": "Problem: The garage door opens about halfway, stops, and the motor unit light flashes in a 3-1 pattern (three flashes, pause, one flash).\nPossible cause: The up-travel limit was reset to its factory midpoint when the unit switched to backup battery power and back (diagnostic 3-1, travel limits unlearned).\nCorrective action: Press and hold the Program and Up buttons on the motor unit together until the light blinks twice, press Up until the door is fully open, press Program once to store the up limit, then run one complete open-close cycle and confirm the 3-1 pattern has stopped.",
+      "unique_terms": [
+        "3-1 pattern",
+        "travel limits unlearned",
+        "factory midpoint"
+      ]
+    },
+    {
+      "id": "gdo-camera-black",
+      "cluster": "garage door opener",
+      "target": "KG-1500W",
+      "query": "garage door opener camera shows a black image at night and the light won't turn on",
+      "entry": "Problem: The integrated camera shows a black image at night while the daytime picture is normal, and the motion-activated light does not turn on when someone enters the garage.\nPossible cause: The camera's privacy shutter (slide KC-PS-15) was left closed after installation; with the shutter closed the infrared night-vision emitters and the motion sensor behind it are blocked.\nCorrective action: Slide the KC-PS-15 privacy shutter fully open on the front of the motor unit, then in the Kestrel app open Camera Settings and turn Night Vision back on; confirm the motion light responds by walking beneath the unit.",
+      "unique_terms": [
+        "KC-PS-15",
+        "privacy shutter",
+        "black image at night"
+      ]
+    },
+    {
+      "id": "gen-fuel-valve-detent",
+      "cluster": "portable generator",
+      "target": "RG-4500E",
+      "query": "generator fuel valve only turns halfway and engine starves under load",
+      "entry": "Problem: The fuel shutoff valve lever (part RG-FV-45) turns only to a halfway detent, and the engine starts but starves and stalls as soon as a load is connected.\nPossible cause: The shipping detent pin under the RG-FV-45 lever, fitted to keep the valve closed in transit, has not been removed, so the valve cannot rotate to the fully open position.\nCorrective action: Stop the engine, pull the red shipping detent pin straight out from beneath the fuel shutoff valve lever, rotate the lever fully to ON, and restart the engine under load.",
+      "unique_terms": [
+        "RG-FV-45",
+        "halfway detent",
+        "shipping detent pin"
+      ]
+    },
+    {
+      "id": "gen-twistlock-breaker",
+      "cluster": "portable generator",
+      "target": "RG-7500E",
+      "query": "generator twist-lock outlet dead but GFCI duplex outlets work",
+      "entry": "Problem: The engine runs normally and all four 120V GFCI duplex outlets work, but the 120/240V twist-lock outlet is dead.\nPossible cause: The twist-lock outlet is protected by its own 30-amp thermal breaker (part RG-TB-30) behind the outlet panel, separate from the main circuit breaker, and it has tripped after a sustained overload on that outlet alone.\nCorrective action: Stop the engine, remove the two outlet panel screws, press the reset stud on the RG-TB-30 thermal breaker until it clicks, reduce the load on the twist-lock outlet below 30 amps, then restart and confirm output at the twist-lock outlet.",
+      "unique_terms": [
+        "RG-TB-30",
+        "thermal breaker",
+        "reset stud"
+      ]
+    },
+    {
+      "id": "gen-propane-stall",
+      "cluster": "portable generator",
+      "target": "RG-10000D",
+      "query": "dual fuel generator runs on gasoline but stalls within seconds after switching to propane",
+      "entry": "Problem: The engine runs normally on gasoline but stalls within a few seconds after the fuel selector is moved to PROPANE, even with a full propane tank connected.\nPossible cause: The propane regulator's excess-flow safety (part RG-PR-10) has tripped because the tank valve was opened quickly, and it now restricts propane flow to a trickle.\nCorrective action: Move the fuel selector to OFF, close the propane tank valve, wait thirty seconds for the RG-PR-10 excess-flow safety to reset, reopen the tank valve slowly no more than a quarter turn at first, then set the selector to PROPANE and restart.",
+      "unique_terms": [
+        "RG-PR-10",
+        "excess-flow safety",
+        "fuel selector is moved"
+      ]
+    }
+  ],
+  "spec_queries": [
+    {
+      "id": "pw-spec-4000psi",
+      "cluster": "pressure washer",
+      "target": "RG-4000P",
+      "query": "which pressure washer is rated 4,000 PSI"
+    },
+    {
+      "id": "gdo-spec-camera",
+      "cluster": "garage door opener",
+      "target": "KG-1500W",
+      "query": "garage door opener with built-in camera and battery backup"
+    },
+    {
+      "id": "gen-spec-propane",
+      "cluster": "portable generator",
+      "target": "RG-10000D",
+      "query": "generator that can run on propane"
+    }
+  ]
+}

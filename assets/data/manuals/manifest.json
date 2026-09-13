@@ -1,0 +1,721 @@
+{
+  "generated_at": "2026-09-09T23:06:01+00:00",
+  "generator": "gemini-cli",
+  "tokens_per_word_estimate": 1.326,
+  "cap_tokens": 8192,
+  "clusters": [
+    [
+      "RG-3200P",
+      "RG-2600P",
+      "RG-4000P"
+    ],
+    [
+      "KG-1200B",
+      "KG-800C",
+      "KG-1500W"
+    ],
+    [
+      "RG-7500E",
+      "RG-4500E",
+      "RG-10000D"
+    ]
+  ],
+  "manuals": [
+    {
+      "model": "RG-3200P",
+      "brand": "Ridgeline Outdoor Power",
+      "category": "pressure washer",
+      "name": "3,200 PSI 2.5 GPM Gas Pressure Washer",
+      "head": true,
+      "file": "RG-3200P.md",
+      "target_tokens": 16000,
+      "words": 17770,
+      "est_tokens": 23563,
+      "over_cap": true,
+      "troubleshooting_start_est_tokens": 19618,
+      "troubleshooting_past_cap": true,
+      "sections": [
+        {
+          "title": "Important Safety Instructions",
+          "words": 2265,
+          "start_word": 33,
+          "start_est_tokens": 44
+        },
+        {
+          "title": "Specifications",
+          "words": 642,
+          "start_word": 2298,
+          "start_est_tokens": 3047
+        },
+        {
+          "title": "Assembly and Setup",
+          "words": 2345,
+          "start_word": 2940,
+          "start_est_tokens": 3898
+        },
+        {
+          "title": "Operation",
+          "words": 5113,
+          "start_word": 5285,
+          "start_est_tokens": 7008
+        },
+        {
+          "title": "Maintenance and Storage",
+          "words": 4397,
+          "start_word": 10398,
+          "start_est_tokens": 13788
+        },
+        {
+          "title": "Troubleshooting",
+          "words": 1660,
+          "start_word": 14795,
+          "start_est_tokens": 19618
+        },
+        {
+          "title": "Parts, Warranty, and Service",
+          "words": 1315,
+          "start_word": 16455,
+          "start_est_tokens": 21819
+        }
+      ]
+    },
+    {
+      "model": "RG-2600P",
+      "brand": "Ridgeline Outdoor Power",
+      "category": "pressure washer",
+      "name": "2,600 PSI 2.3 GPM Gas Pressure Washer",
+      "head": false,
+      "file": "RG-2600P.md",
+      "target_tokens": 16000,
+      "words": 15113,
+      "est_tokens": 20040,
+      "over_cap": true,
+      "troubleshooting_start_est_tokens": 16287,
+      "troubleshooting_past_cap": true,
+      "sections": [
+        {
+          "title": "Important Safety Instructions",
+          "words": 2265,
+          "start_word": 33,
+          "start_est_tokens": 44
+        },
+        {
+          "title": "Specifications",
+          "words": 660,
+          "start_word": 2298,
+          "start_est_tokens": 3047
+        },
+        {
+          "title": "Assembly and Setup",
+          "words": 1971,
+          "start_word": 2958,
+          "start_est_tokens": 3922
+        },
+        {
+          "title": "Operation",
+          "words": 5064,
+          "start_word": 4929,
+          "start_est_tokens": 6536
+        },
+        {
+          "title": "Maintenance and Storage",
+          "words": 2290,
+          "start_word": 9993,
+          "start_est_tokens": 13251
+        },
+        {
+          "title": "Troubleshooting",
+          "words": 1532,
+          "start_word": 12283,
+          "start_est_tokens": 16287
+        },
+        {
+          "title": "Parts, Warranty, and Service",
+          "words": 1298,
+          "start_word": 13815,
+          "start_est_tokens": 18319
+        }
+      ]
+    },
+    {
+      "model": "RG-4000P",
+      "brand": "Ridgeline Outdoor Power",
+      "category": "pressure washer",
+      "name": "4,000 PSI 3.5 GPM Gas Pressure Washer",
+      "head": false,
+      "file": "RG-4000P.md",
+      "target_tokens": 16000,
+      "words": 11781,
+      "est_tokens": 15622,
+      "over_cap": true,
+      "troubleshooting_start_est_tokens": 11670,
+      "troubleshooting_past_cap": true,
+      "sections": [
+        {
+          "title": "Important Safety Instructions",
+          "words": 2265,
+          "start_word": 33,
+          "start_est_tokens": 44
+        },
+        {
+          "title": "Specifications",
+          "words": 665,
+          "start_word": 2298,
+          "start_est_tokens": 3047
+        },
+        {
+          "title": "Assembly and Setup",
+          "words": 1848,
+          "start_word": 2963,
+          "start_est_tokens": 3929
+        },
+        {
+          "title": "Operation",
+          "words": 1721,
+          "start_word": 4811,
+          "start_est_tokens": 6379
+        },
+        {
+          "title": "Maintenance and Storage",
+          "words": 2269,
+          "start_word": 6532,
+          "start_est_tokens": 8661
+        },
+        {
+          "title": "Troubleshooting",
+          "words": 1664,
+          "start_word": 8801,
+          "start_est_tokens": 11670
+        },
+        {
+          "title": "Parts, Warranty, and Service",
+          "words": 1316,
+          "start_word": 10465,
+          "start_est_tokens": 13877
+        }
+      ]
+    },
+    {
+      "model": "KG-1200B",
+      "brand": "Kestrel Home Systems",
+      "category": "garage door opener",
+      "name": "1-1/4 HP Belt-Drive Garage Door Opener with Battery Backup",
+      "head": true,
+      "file": "KG-1200B.md",
+      "target_tokens": 22000,
+      "words": 26225,
+      "est_tokens": 34774,
+      "over_cap": true,
+      "troubleshooting_start_est_tokens": 26047,
+      "troubleshooting_past_cap": true,
+      "sections": [
+        {
+          "title": "Important Safety Instructions",
+          "words": 3291,
+          "start_word": 35,
+          "start_est_tokens": 46
+        },
+        {
+          "title": "Specifications",
+          "words": 966,
+          "start_word": 3326,
+          "start_est_tokens": 4410
+        },
+        {
+          "title": "Installation and Setup",
+          "words": 4890,
+          "start_word": 4292,
+          "start_est_tokens": 5691
+        },
+        {
+          "title": "Operation",
+          "words": 6311,
+          "start_word": 9182,
+          "start_est_tokens": 12175
+        },
+        {
+          "title": "Maintenance and Storage",
+          "words": 4150,
+          "start_word": 15493,
+          "start_est_tokens": 20544
+        },
+        {
+          "title": "Troubleshooting",
+          "words": 4456,
+          "start_word": 19643,
+          "start_est_tokens": 26047
+        },
+        {
+          "title": "Parts, Warranty, and Service",
+          "words": 2126,
+          "start_word": 24099,
+          "start_est_tokens": 31955
+        }
+      ]
+    },
+    {
+      "model": "KG-800C",
+      "brand": "Kestrel Home Systems",
+      "category": "garage door opener",
+      "name": "1/2 HP Chain-Drive Garage Door Opener",
+      "head": false,
+      "file": "KG-800C.md",
+      "target_tokens": 22000,
+      "words": 19660,
+      "est_tokens": 26069,
+      "over_cap": true,
+      "troubleshooting_start_est_tokens": 20235,
+      "troubleshooting_past_cap": true,
+      "sections": [
+        {
+          "title": "Important Safety Instructions",
+          "words": 3288,
+          "start_word": 32,
+          "start_est_tokens": 42
+        },
+        {
+          "title": "Specifications",
+          "words": 896,
+          "start_word": 3320,
+          "start_est_tokens": 4402
+        },
+        {
+          "title": "Installation and Setup",
+          "words": 2766,
+          "start_word": 4216,
+          "start_est_tokens": 5590
+        },
+        {
+          "title": "Operation",
+          "words": 6491,
+          "start_word": 6982,
+          "start_est_tokens": 9258
+        },
+        {
+          "title": "Maintenance and Storage",
+          "words": 1787,
+          "start_word": 13473,
+          "start_est_tokens": 17865
+        },
+        {
+          "title": "Troubleshooting",
+          "words": 2615,
+          "start_word": 15260,
+          "start_est_tokens": 20235
+        },
+        {
+          "title": "Parts, Warranty, and Service",
+          "words": 1785,
+          "start_word": 17875,
+          "start_est_tokens": 23702
+        }
+      ]
+    },
+    {
+      "model": "KG-1500W",
+      "brand": "Kestrel Home Systems",
+      "category": "garage door opener",
+      "name": "1-1/4 HP Belt-Drive Garage Door Opener with Camera and Battery Backup",
+      "head": false,
+      "file": "KG-1500W.md",
+      "target_tokens": 22000,
+      "words": 23278,
+      "est_tokens": 30867,
+      "over_cap": true,
+      "troubleshooting_start_est_tokens": 25754,
+      "troubleshooting_past_cap": true,
+      "sections": [
+        {
+          "title": "Important Safety Instructions",
+          "words": 3293,
+          "start_word": 37,
+          "start_est_tokens": 49
+        },
+        {
+          "title": "Specifications",
+          "words": 951,
+          "start_word": 3330,
+          "start_est_tokens": 4416
+        },
+        {
+          "title": "Installation and Setup",
+          "words": 2826,
+          "start_word": 4281,
+          "start_est_tokens": 5677
+        },
+        {
+          "title": "Operation",
+          "words": 7291,
+          "start_word": 7107,
+          "start_est_tokens": 9424
+        },
+        {
+          "title": "Maintenance and Storage",
+          "words": 5024,
+          "start_word": 14398,
+          "start_est_tokens": 19092
+        },
+        {
+          "title": "Troubleshooting",
+          "words": 1991,
+          "start_word": 19422,
+          "start_est_tokens": 25754
+        },
+        {
+          "title": "Parts, Warranty, and Service",
+          "words": 1865,
+          "start_word": 21413,
+          "start_est_tokens": 28394
+        }
+      ]
+    },
+    {
+      "model": "RG-7500E",
+      "brand": "Ridgeline Outdoor Power",
+      "category": "portable generator",
+      "name": "7,500-Watt Electric-Start Portable Generator",
+      "head": true,
+      "file": "RG-7500E.md",
+      "target_tokens": 20000,
+      "words": 14657,
+      "est_tokens": 19435,
+      "over_cap": true,
+      "troubleshooting_start_est_tokens": 14536,
+      "troubleshooting_past_cap": true,
+      "sections": [
+        {
+          "title": "Important Safety Instructions",
+          "words": 2827,
+          "start_word": 30,
+          "start_est_tokens": 40
+        },
+        {
+          "title": "Specifications",
+          "words": 755,
+          "start_word": 2857,
+          "start_est_tokens": 3788
+        },
+        {
+          "title": "Assembly and Setup",
+          "words": 2390,
+          "start_word": 3612,
+          "start_est_tokens": 4790
+        },
+        {
+          "title": "Operation",
+          "words": 2033,
+          "start_word": 6002,
+          "start_est_tokens": 7959
+        },
+        {
+          "title": "Maintenance and Storage",
+          "words": 2927,
+          "start_word": 8035,
+          "start_est_tokens": 10654
+        },
+        {
+          "title": "Troubleshooting",
+          "words": 2187,
+          "start_word": 10962,
+          "start_est_tokens": 14536
+        },
+        {
+          "title": "Parts, Warranty, and Service",
+          "words": 1508,
+          "start_word": 13149,
+          "start_est_tokens": 17436
+        }
+      ]
+    },
+    {
+      "model": "RG-4500E",
+      "brand": "Ridgeline Outdoor Power",
+      "category": "portable generator",
+      "name": "4,500-Watt Recoil-Start Portable Generator",
+      "head": false,
+      "file": "RG-4500E.md",
+      "target_tokens": 20000,
+      "words": 15992,
+      "est_tokens": 21205,
+      "over_cap": true,
+      "troubleshooting_start_est_tokens": 16670,
+      "troubleshooting_past_cap": true,
+      "sections": [
+        {
+          "title": "Important Safety Instructions",
+          "words": 2827,
+          "start_word": 30,
+          "start_est_tokens": 40
+        },
+        {
+          "title": "Specifications",
+          "words": 775,
+          "start_word": 2857,
+          "start_est_tokens": 3788
+        },
+        {
+          "title": "Assembly and Setup",
+          "words": 2342,
+          "start_word": 3632,
+          "start_est_tokens": 4816
+        },
+        {
+          "title": "Operation",
+          "words": 3509,
+          "start_word": 5974,
+          "start_est_tokens": 7922
+        },
+        {
+          "title": "Maintenance and Storage",
+          "words": 3089,
+          "start_word": 9483,
+          "start_est_tokens": 12574
+        },
+        {
+          "title": "Troubleshooting",
+          "words": 1941,
+          "start_word": 12572,
+          "start_est_tokens": 16670
+        },
+        {
+          "title": "Parts, Warranty, and Service",
+          "words": 1479,
+          "start_word": 14513,
+          "start_est_tokens": 19244
+        }
+      ]
+    },
+    {
+      "model": "RG-10000D",
+      "brand": "Ridgeline Outdoor Power",
+      "category": "portable generator",
+      "name": "10,000-Watt Dual-Fuel Electric-Start Portable Generator",
+      "head": false,
+      "file": "RG-10000D.md",
+      "target_tokens": 20000,
+      "words": 17042,
+      "est_tokens": 22598,
+      "over_cap": true,
+      "troubleshooting_start_est_tokens": 18148,
+      "troubleshooting_past_cap": true,
+      "sections": [
+        {
+          "title": "Important Safety Instructions",
+          "words": 2827,
+          "start_word": 31,
+          "start_est_tokens": 41
+        },
+        {
+          "title": "Specifications",
+          "words": 789,
+          "start_word": 2858,
+          "start_est_tokens": 3790
+        },
+        {
+          "title": "Assembly and Setup",
+          "words": 2557,
+          "start_word": 3647,
+          "start_est_tokens": 4836
+        },
+        {
+          "title": "Operation",
+          "words": 3876,
+          "start_word": 6204,
+          "start_est_tokens": 8227
+        },
+        {
+          "title": "Maintenance and Storage",
+          "words": 3606,
+          "start_word": 10080,
+          "start_est_tokens": 13366
+        },
+        {
+          "title": "Troubleshooting",
+          "words": 1833,
+          "start_word": 13686,
+          "start_est_tokens": 18148
+        },
+        {
+          "title": "Parts, Warranty, and Service",
+          "words": 1523,
+          "start_word": 15519,
+          "start_est_tokens": 20578
+        }
+      ]
+    },
+    {
+      "model": "NF-D20B",
+      "brand": "Northfield Tools",
+      "category": "cordless drill/driver",
+      "name": "20V Brushless 1/2-inch Drill/Driver",
+      "head": false,
+      "file": "NF-D20B.md",
+      "target_tokens": 4500,
+      "words": 3640,
+      "est_tokens": 4827,
+      "over_cap": false,
+      "troubleshooting_start_est_tokens": 3814,
+      "troubleshooting_past_cap": false,
+      "sections": [
+        {
+          "title": "Important Safety Instructions",
+          "words": 673,
+          "start_word": 29,
+          "start_est_tokens": 38
+        },
+        {
+          "title": "Specifications",
+          "words": 187,
+          "start_word": 702,
+          "start_est_tokens": 931
+        },
+        {
+          "title": "Assembly and Setup",
+          "words": 510,
+          "start_word": 889,
+          "start_est_tokens": 1179
+        },
+        {
+          "title": "Operation",
+          "words": 809,
+          "start_word": 1399,
+          "start_est_tokens": 1855
+        },
+        {
+          "title": "Maintenance and Storage",
+          "words": 668,
+          "start_word": 2208,
+          "start_est_tokens": 2928
+        },
+        {
+          "title": "Troubleshooting",
+          "words": 407,
+          "start_word": 2876,
+          "start_est_tokens": 3814
+        },
+        {
+          "title": "Parts, Warranty, and Service",
+          "words": 357,
+          "start_word": 3283,
+          "start_est_tokens": 4353
+        }
+      ]
+    },
+    {
+      "model": "KT-7W",
+      "brand": "Kestrel Home Systems",
+      "category": "smart thermostat",
+      "name": "7-Day Programmable Wi-Fi Thermostat",
+      "head": false,
+      "file": "KT-7W.md",
+      "target_tokens": 5000,
+      "words": 4583,
+      "est_tokens": 6077,
+      "over_cap": false,
+      "troubleshooting_start_est_tokens": 4408,
+      "troubleshooting_past_cap": false,
+      "sections": [
+        {
+          "title": "Important Safety Instructions",
+          "words": 739,
+          "start_word": 30,
+          "start_est_tokens": 40
+        },
+        {
+          "title": "Specifications",
+          "words": 200,
+          "start_word": 769,
+          "start_est_tokens": 1020
+        },
+        {
+          "title": "Installation and Setup",
+          "words": 592,
+          "start_word": 969,
+          "start_est_tokens": 1285
+        },
+        {
+          "title": "Operation",
+          "words": 1059,
+          "start_word": 1561,
+          "start_est_tokens": 2070
+        },
+        {
+          "title": "Maintenance and Storage",
+          "words": 704,
+          "start_word": 2620,
+          "start_est_tokens": 3474
+        },
+        {
+          "title": "Troubleshooting",
+          "words": 850,
+          "start_word": 3324,
+          "start_est_tokens": 4408
+        },
+        {
+          "title": "Parts, Warranty, and Service",
+          "words": 409,
+          "start_word": 4174,
+          "start_est_tokens": 5535
+        }
+      ]
+    },
+    {
+      "model": "NF-HR100",
+      "brand": "Northfield Tools",
+      "category": "hose reel",
+      "name": "100-ft Wall-Mount Retractable Hose Reel",
+      "head": false,
+      "file": "NF-HR100.md",
+      "target_tokens": 2500,
+      "words": 2115,
+      "est_tokens": 2804,
+      "over_cap": false,
+      "troubleshooting_start_est_tokens": 2234,
+      "troubleshooting_past_cap": false,
+      "sections": [
+        {
+          "title": "Important Safety Instructions",
+          "words": 420,
+          "start_word": 30,
+          "start_est_tokens": 40
+        },
+        {
+          "title": "Specifications",
+          "words": 133,
+          "start_word": 450,
+          "start_est_tokens": 597
+        },
+        {
+          "title": "Assembly and Setup",
+          "words": 298,
+          "start_word": 583,
+          "start_est_tokens": 773
+        },
+        {
+          "title": "Operation",
+          "words": 449,
+          "start_word": 881,
+          "start_est_tokens": 1168
+        },
+        {
+          "title": "Maintenance and Storage",
+          "words": 355,
+          "start_word": 1330,
+          "start_est_tokens": 1764
+        },
+        {
+          "title": "Troubleshooting",
+          "words": 240,
+          "start_word": 1685,
+          "start_est_tokens": 2234
+        },
+        {
+          "title": "Parts, Warranty, and Service",
+          "words": 190,
+          "start_word": 1925,
+          "start_est_tokens": 2553
+        }
+      ]
+    }
+  ]
+}

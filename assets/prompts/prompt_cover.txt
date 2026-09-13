@@ -1,0 +1,39 @@
+# Elasticsearch Chunk Rescorer LinkedIn Cover Design Specification
+
+A stylised LinkedIn cover image — bold, visual, and marketing-oriented. Not an architecture diagram. The composition communicates one idea through one everyday object: a thick manual whose opening pages are lit and whose remaining pages lie in the dark, with a single glowing line of text lifted out of those dark pages and rising into the light. Something that could not be read has been brought up to where it can be.
+
+**Canvas:** 1920 × 1080 px, 16:9, the size LinkedIn specifies for an article cover image (it crops uploads to 16:9, so match it exactly and nothing is lost). Deliver the image as a PNG file, not JPEG, WEBP or GIF. Deep ink background (#0A0F1E) with a subtle radial glow high in the frame, so the top of the image reads as the light and the bottom as the dark.
+
+**Framing:** The full composition must sit within the frame with at least 10% clear margin on the left and right edges, and 12% on top and bottom. Nothing may touch or cross a border. LinkedIn shows the cover at 16:9 on the article page but at a shorter 1.91:1 ratio in feed previews, and the article title overlays part of the cover on some surfaces. Keep every essential element — the book and the lifted line — inside that central safe area so the story survives a shallow crop of the top and bottom, and keep the upper 12% free of anything that would fight an overlaid title.
+
+**Core Concept:**
+One object, one contrast, one motion. A thick book, clearly a manual, stands open with its pages fanned toward the viewer so the depth of the page block is visible. Roughly the first third of the pages are lit; the remaining two-thirds are in shadow. From deep inside the shadowed pages, one line of text glows and lifts free of the page, rising up and toward the viewer into the lit space above the book. The eye should go book, dark pages, glowing line, upward, and understand without reading anything that the important line was buried in the part nobody reads.
+
+**The Book (lower centre, occupying most of the width):**
+A heavy, thick manual — hundreds of pages — resting open or standing upright with the page block angled toward the viewer, so the individual page edges read as fine horizontal lines stacked deep. The cover and binding are plain and dark, with no lettering. Light falls from above and from the front: the top portion of the page block is brightly lit in cool light blue and reads as crisp, readable paper. The light stops along a clean, straight horizontal boundary about a third of the way down the block — not a gradient, a definite edge, as if a lamp had been set to reach only this far. Below that boundary the pages continue, dense and numerous, but they fall into deep slate-grey shadow that darkens toward the bottom until the lowest pages are almost lost against the background. The dark part of the book must be visibly larger than the lit part; that proportion is the point.
+
+**The Lifted Line (the hero):**
+Deep in the shadowed pages, about three-quarters of the way down the block, one line of text glows warm yellow — a single thin luminous strip the width of a line of type, laid along the page edge where it lives. From that spot, the same line rises out of the book: a slender glowing bar of yellow light, longer and brighter than its origin, floating free above the page block in the lit space, tilted slightly as if just pulled loose. It is the brightest and warmest element in the frame. A soft yellow trail connects the buried origin to the risen bar, so the viewer sees where it came from. The lifted bar must sit clearly above the light boundary, in the region where the pages are readable.
+
+Render the line as pure light, not legible text: a glowing strip with faint irregular texture that suggests a line of print without any letters. Do not draw the strip as a highlighter mark, a ribbon bookmark, a sticky note or a tab.
+
+**Connecting Elements:**
+- The soft yellow trail from the buried line to the lifted bar is the only connector. No arrows, no arrowheads, no boxes, no borders around elements
+- Optionally, a few tiny motes of yellow light along the trail, drifting upward, to give the lift a sense of motion. Keep them sparse
+- No hands, no figures, no desk, no lamp, no other objects. The book floats in dark space
+
+**Text:**
+None. **No title, no headline, no labels, no annotations, no captions, no numbers, no letters or glyphs of any kind anywhere in the frame.** The pages must not show readable text or even pseudo-text — page edges only, seen from the side. No lettering on the cover or spine. The metaphor carries the entire message.
+
+**Brand Reference — palette, not logo:**
+**No logo anywhere in the frame.** Do not place the Elastic brandmark, the "elastic" wordmark, any lockup, or any other company mark, badge, or watermark. The brand is expressed entirely through colour.
+
+The colour scheme is a cool dark field with one warm accent, drawn from the Elastic palette:
+- Background: deep ink #0A0F1E
+- The lit pages and the light falling on them: light blue #1BA9F5 shading toward teal #00BFB3
+- The shadowed pages: desaturated slate grey, deliberately outside the palette, so the buried line and the lifted bar stand out against them
+- The buried line, its trail, the motes and the lifted bar: yellow #FEC514, the only warm colour in the frame, used for nothing else
+- No pink and no green anywhere; keep the palette to blue, teal, grey and one yellow
+
+**Mood:**
+Cinematic dark tech with a touch of the library. Think product launch graphic, not whiteboard diagram and not a stock photo of a book. Clean, confident, with depth and luminosity. The emotional read is *discovery*: most of the book was in the dark, and the one line that mattered has just been brought up into the light.

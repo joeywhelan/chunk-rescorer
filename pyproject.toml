@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project]
+name = "chunk-rescorer"
+version = "0.1.0"
+description = "Demo: Elasticsearch chunk_rescorer with jina-reranker-v3.5 on EIS"
+requires-python = ">=3.12"
+dependencies = [
+    "elasticsearch>=9.5.0",
+    "jupyterlab>=4.6.3",
+    "python-dotenv>=1.2.3",
+]
