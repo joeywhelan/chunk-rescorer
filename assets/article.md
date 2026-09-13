@@ -3,7 +3,7 @@
 # What Your Reranker Never Sees
 *Elasticsearch's chunk_rescorer sends the best-matching chunk instead of a truncated document.*
 
-This article is the third in a series I've written on chunking in Elasticsearch.  Previous chunking articles:
+This article is the third in a series I've written on chunking in Elasticsearch.  In contrast to those previous discussions, this chunking strategy occurs at query time (read).  Previous chunking articles below.  These are all oriented to index-time (write) chunking:
 - [Chunking Strategies](https://www.linkedin.com/pulse/elasticsearch-chunking-agentic-ai-choosing-right-strategy-joey-whelan-qjz5c/)
 - [Late Chunking](https://www.linkedin.com/pulse/late-chunking-tool-upgrade-joey-whelan-magxc/)
 
