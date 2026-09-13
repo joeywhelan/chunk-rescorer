@@ -1,7 +1,7 @@
 ![Cover image](images/cover.png)
 
 # What Your Reranker Never Sees
-*Elasticsearch's chunk_rescorer sends a reranker the best-matching chunk instead of a truncated document.*
+*Elasticsearch's chunk_rescorer sends the best-matching chunk instead of a truncated document.*
 
 This article is the third in a series I've written on chunking in Elasticsearch.  Previous chunking articles:
 - [Chunking Strategies](https://www.linkedin.com/pulse/elasticsearch-chunking-agentic-ai-choosing-right-strategy-joey-whelan-qjz5c/)
@@ -27,7 +27,7 @@ Rerankers have fixed token limits.  Many, including jina-reranker-v3.5, silently
 - Long document fields get truncated before the reranker sees the relevant passage.  Sending the best chunk instead increases relevance: in the demo, four of nine correct became nine of nine.
 - No re-architecture is necessary to implement this. It's simply an option on the reranker retriever in the search request; the index is untouched.
 - This technique yields faster and cheaper reranking: about ten times less rerank time and payload in the demo. 
-- We get a wider rerank window. Whole documents exhaust it after a handful of candidates. Chunks allow ranking of the entire catalog.
+- We get a wider rerank window. Whole documents exhaust it after a handful of candidates. Chunks let us rank the entire catalog.
 
 ---
 
